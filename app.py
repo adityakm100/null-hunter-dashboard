@@ -64,6 +64,22 @@ if uploaded_file is not None:
                 df_to_modify[col] = imputer.fit_transform(df_to_modify[[col]])
                 st.success(f"Simple imputation applied to '{col}' using {strat} strategy!")
 
+        elif imputation_method == "Advanced KNN (K Nearest Neighbors) Imputation":
+            st.info("KNN imputation considers the average similarity between rows to impute missing values. The goal is to capture complex relationships in the data for more accurate imputation.")
+            if st.button("Apply KNN Imputation"):
+                imputer = KNNImputer(n_neighbors = 5)
+                num_cols = df_to_modify.select_dtypes(include=np.number).columns
+                df_to_modify[num_cols] = imputer.fit_transform(df_to_modify[num_cols])
+                st.success("KNN imputation applied successfully to all numeric columns!")
+        
+        st.divider()
+        st.download_button("📥 Download Cleaned Dataset", data=df_to_modify.to_csv(index=False), file_name="cleaned_data.csv", mime="text/csv")
+    except Exception as e:
+        st.error(f"Error processing the file: {e}")
+else:
+    st.info("Awaiting for dataset upload. Check the sidebar!")
+
+
 
 
 
