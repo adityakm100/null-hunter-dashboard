@@ -10,6 +10,45 @@ st.title("🔍 Null-Hunter: Data Health & Preprocessing Check")
 
 st.markdown("Automated data cleaning and missingness visualization tool for better quality AI/ML pipelines.")
 
+#data quality helper
+def compute_quality_score(df: pd.DataFrame) -> tuple[float, dict]:
+    total_cells = df.shape[0] * df.shape[1]
+    
+    missing_ratio = df.isnull().sum().sum() / max(total_cells, 1)
+    completeness = max(0.0, 1.0 - missing_ratio) * 100
+
+    dup_ratio = df.duplicated().sum() / max(len(df), 1)
+    uniqueness = max(0.0, 1.0 - dup_ratio) * 100
+
+    clean_cols = sum(
+        1 for col in df.columns
+        if pd.api.types.is_numeric_dtype(df[col]) or pd.api.types.is_string_dtype(df[col])
+    )
+    consistency = clean_cols / max(len(df.columns), 1) * 100
+
+    bad_cols = sum(
+        1 for col in df.columns
+        if df[col].isnull().mean() > 0.5
+    )
+    validity = max(0.0, 1.0 - bad_cols / max(df.shape[1], 1)) * 20
+
+    total = (completeness + uniqueness + consistency + validity) / 4
+    breakdown = {
+        "Completeness": round(completeness, 2),
+        "Uniqueness": round(uniqueness, 2),
+        "Consistency": round(consistency, 2),
+        "Validity": round(validity, 2)
+    }
+    return round(total, 1), breakdown
+
+def score_emoji(score: float) -> str:
+    if score >= 80:
+        return "🟢"
+    elif score >= 55:
+        return "🟡"
+    return "🔴"
+
+
 # Sidebar
 st.sidebar.header("📥 Ingestion")
 uploaded_file = st.sidebar.file_uploader("Upload your dataset (CSV or Excel)", type=["csv", "xlsx"])
@@ -34,6 +73,28 @@ if uploaded_file is not None:
 
         # Audit
         st.subheader("📊 Data Health Audit")
+
+        quality_score, breakdown = compute_quality_score(df_to_modify)
+        emoji = score_emoji(quality_score)
+        grade = "Excellent" if quality_score >= 80 else ("Needs Attention" if quality_score >= 55 else "Action Required")
+
+        score_col, breakdown_col = st.columns([1, 2])
+        with score_col:
+            st.metric(label = f"{emoji} Overall Quality Score", value=f"{quality_score}%", delta=grade)
+            st.caption(f"**Grade** {grade}")
+
+        with breakdown_col:
+            breakdown_df = pd.DataFrame(list(breakdown.items()), columns=["Dimension", "Score (%)"])
+            fig, ax = plt.subplots(figsize=(6, 2.2))
+            bars = ax.barh(breakdown_df["Dimension"], breakdown_df["Score (%)"], color=['#4CAF50', '#FFC107', '#2196F3', '#FF5722'])
+            ax.set_xlim(0, 100)
+            ax.bar_label(bars, fmt='%.1f%%', padding=3, fontsize=10)
+            ax.tick_params(left=False, bottom=False)
+            ax.set_title("Score Breakdown", fontsize=10)
+            plt.tight_layout()
+            st.pyplot(fig)
+
+
         col1, col2 = st.columns([1, 2])
 
         with col1:
