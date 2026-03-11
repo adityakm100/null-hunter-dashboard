@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import missingno as msno
 from sklearn.impute import KNNImputer
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
 
 st.set_page_config(page_title="Null-Hunter Dashboard", layout="wide")
 st.title("🔍 Null-Hunter: Data Health & Preprocessing Check")
@@ -124,12 +126,12 @@ if uploaded_file is not None:
             "Drop Duplicates",
             "Simple Imputation (Mean/Median/Most Frequent)",
             "Advanced KNN (K Nearest Neighbors) Imputation",
+            "MICE (Iterative/Multiple Imputation)",
         ])
 
         if imputation_method == "Drop Duplicates":
             dupe_count = df_to_modify.duplicated().sum()
             if st.button(f"Clear {dupe_count} Duplicates"):
-                # FIX 4: Write result back to session state
                 st.session_state.df_working = df_to_modify.drop_duplicates().reset_index(drop=True)
                 st.success("Duplicates removed successfully!")
                 st.rerun()
@@ -158,19 +160,45 @@ if uploaded_file is not None:
                     st.rerun()
 
         elif imputation_method == "Advanced KNN (K Nearest Neighbors) Imputation":
-            st.info("KNN imputation considers the average similarity between rows to impute missing values. "
-                    "The goal is to capture complex relationships in the data for more accurate imputation.")
+            st.info("KNN imputation considers the average similarity between rows to impute missing values. The goal is to capture complex relationships in the data for more accurate imputation.")
 
             if not num_cols_with_nulls:
                 st.info("No numeric columns with missing values found for KNN imputation.")
             else:
                 st.write(f"Will impute these numeric columns: **{', '.join(num_cols_with_nulls)}**")
                 if st.button("Apply KNN Imputation"):
-                    imputer = KNNImputer(n_neighbors=5)
                     df_knn = st.session_state.df_working.copy()
-                    df_knn[num_cols_with_nulls] = imputer.fit_transform(df_knn[num_cols_with_nulls])
+                    knn_num_cols = df_knn.select_dtypes(include=np.number).columns[
+                        df_knn.select_dtypes(include=np.number).isnull().any()
+                    ].tolist()
+                    imputer = KNNImputer(n_neighbors=5)
+                    df_knn[knn_num_cols] = imputer.fit_transform(df_knn[knn_num_cols])
                     st.session_state.df_working = df_knn
-                    st.success(f"KNN imputation applied successfully to: {', '.join(num_cols_with_nulls)}!")
+                    st.success(f"KNN imputation applied successfully to: {', '.join(knn_num_cols)}!")
+                    st.rerun()
+            
+        elif imputation_method == "MICE (Iterative/Multiple Imputation)":
+
+            st.info("MICE (Multiple Imputation by Chained Equations) is an advanced technique that models each feature with missing values as a function of other features in a round-robin fashion. It iteratively fills in missing values multiple times to create several complete datasets, which can be used to account for the uncertainty of the imputations. It is most commonly used for MAR (Missing At Random) data and can handle complex relationships between features, in a way that simple imputation methods cannot. Note that it can only be used on NUMERIC columns, and may not be suitable for large datasets due to its computational intensity.")
+
+            if not num_cols_with_nulls:
+                st.info("No numeric columns with missing values found for MICE imputation.")
+            else:
+                st.write(f"Will impute these numeric columns: **{', '.join(num_cols_with_nulls)}**")
+                mice_iters = st.slider("Max iterations:", min_value=1, max_value=20, value=10)
+                if st.button("Apply MICE Imputation"):
+                    with st.spinner("Running MICE — this may take a moment on large datasets…"):
+                        df_mice = st.session_state.df_working.copy()
+                        mice_num_cols = df_mice.select_dtypes(include=np.number).columns[
+                            df_mice.select_dtypes(include=np.number).isnull().any()
+                        ].tolist()
+                        if not mice_num_cols:
+                            st.warning("No numeric columns with missing values found.")
+                        else:
+                            imputer = IterativeImputer(max_iter=mice_iters, random_state=42)
+                            df_mice[mice_num_cols] = imputer.fit_transform(df_mice[mice_num_cols])
+                            st.session_state.df_working = df_mice
+                    st.success(f"MICE imputation applied successfully to: {', '.join(mice_num_cols)}!")
                     st.rerun()
 
         st.divider()
