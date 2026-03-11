@@ -1,4 +1,4 @@
-# 🔍 Null-Hunter: Data Health & Preprocessing Dashboard
+# Null-Hunter: Data Health & Preprocessing Dashboard
 
 > **Live Demo → [null-hunter-dashboard.streamlit.app](https://null-hunter-dashboard.streamlit.app)**
 
