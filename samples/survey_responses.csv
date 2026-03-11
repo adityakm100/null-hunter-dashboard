@@ -1,0 +1,101 @@
+respondent_id,age,gender,education_level,employment_status,satisfaction_score,hours_worked_per_week,commute_time_minutes,tenure_years,would_recommend_employer
+1,60,Female,Bachelor's,Unemployed,4.0,42.0,57.0,4.0,Yes
+2,50,Female,High School,Full-time,10.0,34.0,27.0,8.0,No
+3,36,Male,Master's,Full-time,5.0,42.0,,11.0,Yes
+4,64,Male,Master's,Full-time,2.0,22.0,,13.0,No
+5,29,Male,Bachelor's,Full-time,8.0,55.0,78.0,1.0,No
+6,42,Male,Bachelor's,Full-time,4.0,53.0,78.0,16.0,Yes
+7,60,Female,Master's,Full-time,9.0,15.0,87.0,13.0,No
+8,40,Female,Bachelor's,Full-time,5.0,17.0,21.0,12.0,Yes
+9,44,Female,Bachelor's,Full-time,9.0,27.0,89.0,8.0,No
+10,32,Male,High School,Full-time,4.0,42.0,82.0,14.0,No
+11,32,Male,High School,Full-time,10.0,39.0,77.0,14.0,Yes
+12,45,Female,Master's,Full-time,5.0,47.0,5.0,10.0,Yes
+13,57,Female,Master's,Part-time,,52.0,55.0,15.0,No
+14,61,Female,Bachelor's,Full-time,8.0,20.0,49.0,16.0,Yes
+15,45,Female,Bachelor's,Full-time,3.0,58.0,81.0,3.0,Yes
+16,24,Female,Bachelor's,Full-time,1.0,59.0,,0.0,Yes
+17,43,Female,Master's,Part-time,,46.0,66.0,7.0,Yes
+18,23,Male,Master's,Full-time,4.0,59.0,69.0,16.0,Yes
+19,45,Male,Master's,Full-time,2.0,35.0,,2.0,Yes
+20,51,Male,Master's,Full-time,1.0,30.0,38.0,19.0,Yes
+21,59,Male,Bachelor's,Full-time,7.0,35.0,76.0,14.0,No
+22,23,Female,High School,Full-time,,25.0,43.0,14.0,Yes
+23,42,Male,High School,Full-time,7.0,51.0,30.0,13.0,Yes
+24,54,Female,Master's,Full-time,5.0,50.0,38.0,13.0,Yes
+25,33,Female,Bachelor's,Part-time,1.0,49.0,58.0,1.0,Yes
+26,43,Male,High School,Unemployed,7.0,33.0,7.0,12.0,Yes
+27,46,Male,High School,Full-time,,34.0,54.0,13.0,Yes
+28,48,Female,Bachelor's,Full-time,9.0,32.0,,18.0,No
+29,63,Male,High School,Part-time,3.0,55.0,69.0,6.0,Yes
+30,49,Male,High School,Full-time,9.0,28.0,,2.0,No
+31,37,Male,Bachelor's,Full-time,1.0,29.0,9.0,14.0,No
+32,36,Male,Bachelor's,Full-time,1.0,45.0,61.0,13.0,Yes
+33,24,Female,Bachelor's,Full-time,4.0,15.0,21.0,10.0,No
+34,58,Female,High School,Unemployed,9.0,17.0,51.0,14.0,No
+35,28,Female,Master's,Part-time,6.0,30.0,27.0,12.0,Yes
+36,42,Female,High School,Part-time,3.0,37.0,83.0,17.0,Yes
+37,30,Female,Bachelor's,Full-time,1.0,25.0,89.0,5.0,No
+38,60,Male,Master's,Full-time,4.0,26.0,18.0,2.0,No
+39,39,Female,Bachelor's,Full-time,9.0,24.0,70.0,18.0,Yes
+40,25,Female,Master's,Full-time,3.0,46.0,79.0,14.0,No
+41,46,Female,Bachelor's,Full-time,9.0,30.0,55.0,4.0,No
+42,35,Female,Bachelor's,Part-time,,22.0,42.0,9.0,No
+43,30,Male,High School,Part-time,4.0,52.0,68.0,6.0,No
+44,47,Male,Bachelor's,Full-time,3.0,26.0,42.0,16.0,No
+45,23,Male,Bachelor's,Unemployed,10.0,38.0,,6.0,Yes
+46,41,Male,High School,Part-time,5.0,42.0,86.0,11.0,Yes
+47,49,Female,PhD,Full-time,5.0,22.0,34.0,16.0,Yes
+48,28,Female,Bachelor's,Full-time,3.0,42.0,83.0,12.0,No
+49,29,Male,Master's,Full-time,9.0,50.0,55.0,19.0,Yes
+50,56,Female,Bachelor's,Full-time,4.0,40.0,,3.0,Yes
+51,35,Male,Master's,Full-time,5.0,22.0,56.0,9.0,No
+52,38,Male,Bachelor's,Part-time,4.0,42.0,42.0,2.0,Yes
+53,57,Male,Bachelor's,Full-time,5.0,42.0,83.0,8.0,No
+54,61,Male,Bachelor's,Full-time,7.0,51.0,34.0,12.0,No
+55,25,Female,High School,Full-time,9.0,55.0,55.0,17.0,Yes
+56,23,Male,Master's,Full-time,7.0,50.0,85.0,14.0,Yes
+57,27,Female,Bachelor's,Unemployed,5.0,41.0,9.0,3.0,Yes
+58,63,Female,High School,Part-time,10.0,31.0,33.0,14.0,Yes
+59,25,Male,Bachelor's,Full-time,10.0,23.0,8.0,1.0,Yes
+60,50,Non-binary,High School,Full-time,7.0,47.0,14.0,14.0,Yes
+61,39,Non-binary,Master's,Full-time,10.0,34.0,,7.0,Yes
+62,47,Male,PhD,Full-time,5.0,27.0,21.0,7.0,Yes
+63,55,Female,Master's,Full-time,3.0,42.0,78.0,16.0,Yes
+64,31,Male,Bachelor's,Full-time,7.0,43.0,,11.0,Yes
+65,57,Male,High School,Full-time,2.0,27.0,88.0,18.0,Yes
+66,35,Male,Master's,Full-time,9.0,49.0,73.0,9.0,Yes
+67,52,Female,Bachelor's,Full-time,10.0,20.0,38.0,8.0,No
+68,36,Female,PhD,Full-time,10.0,32.0,10.0,4.0,No
+69,29,Male,PhD,Full-time,1.0,19.0,57.0,5.0,Yes
+70,35,Male,Master's,Full-time,6.0,39.0,70.0,19.0,No
+71,44,Female,Bachelor's,Full-time,7.0,16.0,81.0,1.0,Yes
+72,61,Male,Bachelor's,Unemployed,8.0,24.0,47.0,12.0,No
+73,42,Male,Master's,Part-time,10.0,44.0,79.0,5.0,Yes
+74,37,Female,Bachelor's,Full-time,9.0,59.0,27.0,4.0,No
+75,39,Non-binary,High School,Full-time,2.0,19.0,59.0,0.0,No
+76,45,Male,Bachelor's,Full-time,10.0,47.0,84.0,5.0,No
+77,47,Female,Master's,Full-time,2.0,15.0,79.0,5.0,No
+78,46,Female,Bachelor's,Full-time,5.0,32.0,20.0,15.0,Yes
+79,62,Male,Bachelor's,Unemployed,5.0,46.0,12.0,3.0,Yes
+80,50,Female,High School,Full-time,6.0,25.0,8.0,10.0,No
+81,36,Male,Bachelor's,Full-time,3.0,35.0,8.0,8.0,Yes
+82,22,Female,PhD,Full-time,8.0,40.0,60.0,2.0,No
+83,46,Female,High School,Full-time,1.0,39.0,29.0,18.0,Yes
+84,28,Female,Bachelor's,Full-time,6.0,36.0,,7.0,Yes
+85,30,Male,Master's,Unemployed,4.0,41.0,71.0,4.0,Yes
+86,45,Female,Master's,Full-time,1.0,27.0,31.0,3.0,Yes
+87,22,Male,Bachelor's,Unemployed,7.0,47.0,36.0,5.0,Yes
+88,29,Male,Master's,Unemployed,9.0,48.0,54.0,1.0,Yes
+89,45,Male,Bachelor's,Full-time,4.0,55.0,65.0,19.0,Yes
+90,32,Female,Bachelor's,Full-time,4.0,49.0,55.0,10.0,Yes
+91,38,Female,Master's,Full-time,6.0,15.0,23.0,3.0,Yes
+92,29,Male,Master's,Full-time,3.0,35.0,25.0,14.0,No
+93,56,Female,Master's,Full-time,6.0,20.0,9.0,5.0,Yes
+94,56,Male,Master's,Part-time,7.0,42.0,,16.0,Yes
+95,54,Female,Bachelor's,Full-time,,31.0,46.0,5.0,Yes
+96,26,Male,Bachelor's,Full-time,10.0,19.0,65.0,18.0,No
+97,63,Female,Master's,Part-time,3.0,45.0,26.0,1.0,Yes
+98,60,Male,Bachelor's,Full-time,7.0,19.0,25.0,14.0,No
+99,62,Female,Master's,Part-time,3.0,52.0,74.0,10.0,No
+100,49,Male,Master's,Full-time,2.0,17.0,5.0,7.0,Yes

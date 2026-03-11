@@ -8,7 +8,7 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
 st.set_page_config(page_title="Null-Hunter Dashboard", layout="wide")
-st.title("🔍 Null-Hunter: Data Health & Preprocessing Check")
+st.title("🔍 Data Health & Preprocessing Check")
 
 st.markdown("Automated data cleaning and missingness visualization tool for better quality AI/ML pipelines.")
 
@@ -17,24 +17,18 @@ def compute_quality_score(df: pd.DataFrame) -> tuple[float, dict]:
     total_cells = df.shape[0] * df.shape[1]
     
     missing_ratio = df.isnull().sum().sum() / max(total_cells, 1)
-    completeness = max(0.0, 1.0 - missing_ratio) * 100
+    completeness = min(max(0.0, 1.0 - (missing_ratio * 3)) * 100, 100.0)
 
     dup_ratio = df.duplicated().sum() / max(len(df), 1)
     uniqueness = max(0.0, 1.0 - dup_ratio) * 100
 
-    clean_cols = sum(
-        1 for col in df.columns
-        if pd.api.types.is_numeric_dtype(df[col]) or pd.api.types.is_string_dtype(df[col])
-    )
-    consistency = clean_cols / max(len(df.columns), 1) * 100
+    inconsistent_cols = sum(1 for col in df.columns if df[col].isnull().mean() > 0.05)
+    consistency = max(0.0, 1.0 - inconsistent_cols / max(df.shape[1], 1)) * 100
 
-    bad_cols = sum(
-        1 for col in df.columns
-        if df[col].isnull().mean() > 0.5
-    )
-    validity = max(0.0, 1.0 - bad_cols / max(df.shape[1], 1)) * 20
+    bad_cols = sum(1 for col in df.columns if df[col].isnull().mean() > 0.10)
+    validity = max(0.0, 1.0 - bad_cols / max(df.shape[1], 1)) * 100
 
-    total = (completeness + uniqueness + consistency + validity) / 4
+    total = (completeness * 0.40) + (uniqueness * 0.20) + (consistency * 0.20) + (validity * 0.20)
     breakdown = {
         "Completeness": round(completeness, 2),
         "Uniqueness": round(uniqueness, 2),
