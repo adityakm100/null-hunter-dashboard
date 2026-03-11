@@ -211,4 +211,4 @@ if uploaded_file is not None:
 else:
     st.session_state.df_working = None
     st.session_state.pop("loaded_file", None)
-    st.info("Awaiting for dataset upload. Check the sidebar!")
+    st.info("Waiting for dataset upload. Check the sidebar!")
